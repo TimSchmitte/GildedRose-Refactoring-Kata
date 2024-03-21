@@ -1,8 +1,9 @@
 package com.gildedrose;
 
-public class DefaultItemDecorator implements ItemDecorator {
+public class ConjuredItemDecorator implements ItemDecorator {
+    public static final String ITEM_PREFIX = "Conjured";
 
-    protected DefaultItemDecorator(Item item) {
+    protected ConjuredItemDecorator(Item item) {
         this.item = item;
     }
 
@@ -36,9 +37,11 @@ public class DefaultItemDecorator implements ItemDecorator {
 
     private final Item item;
 
-    public void decrementItemQuality() {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
+    private void decrementItemQuality() {
+        if (item.quality > 1) {
+            item.quality = item.quality - 2;
+        }else{
+            item.quality =0;
         }
     }
 

@@ -3,6 +3,7 @@ package com.gildedrose;
 public class TAFKAL80ETCBackstagePass implements ItemDecorator {
 
     public static final String ITEM_NAME = "Backstage passes to a TAFKAL80ETC concert";
+    public static final int MAX_QUALITY = 50;
 
     protected TAFKAL80ETCBackstagePass(Item item) {
         this.item = item;
@@ -19,9 +20,8 @@ public class TAFKAL80ETCBackstagePass implements ItemDecorator {
     }
 
     private void applyQualityAdaptations() {
-        if (item.quality < GildedRose.MAX_QUALITY) {
+        if (item.quality < MAX_QUALITY) {
             incrementItemQuality();
-
             additionalIncrementQualityForBackstagePass();
         }
     }
@@ -46,13 +46,13 @@ public class TAFKAL80ETCBackstagePass implements ItemDecorator {
 
     private void additionalIncrementQualityForBackstagePass() {
         if (item.sellIn < 11) {
-            if (item.quality < GildedRose.MAX_QUALITY) {
+            if (item.quality < MAX_QUALITY) {
                 incrementItemQuality();
             }
         }
 
         if (item.sellIn < 6) {
-            if (item.quality < GildedRose.MAX_QUALITY) {
+            if (item.quality < MAX_QUALITY) {
                 incrementItemQuality();
             }
         }

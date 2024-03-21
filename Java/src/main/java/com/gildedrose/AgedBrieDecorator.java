@@ -3,6 +3,7 @@ package com.gildedrose;
 public class AgedBrieDecorator implements ItemDecorator {
 
     public static final String AGED_BRIE = "Aged Brie";
+    public static final int MAX_QUALITY = 50;
 
     protected AgedBrieDecorator(Item item) {
         this.item = item;
@@ -19,7 +20,7 @@ public class AgedBrieDecorator implements ItemDecorator {
     }
 
     private void applyQualityAdaptations() {
-        if (this.item.quality < GildedRose.MAX_QUALITY) {
+        if (this.item.quality < MAX_QUALITY) {
             incrementItemQuality();
 
         }
@@ -30,7 +31,7 @@ public class AgedBrieDecorator implements ItemDecorator {
     }
 
     private void applyExtraAdaptationsToQualityForExpiredItem() {
-        if (item.quality < GildedRose.MAX_QUALITY) {
+        if (item.quality < MAX_QUALITY) {
             incrementItemQuality();
         }
     }

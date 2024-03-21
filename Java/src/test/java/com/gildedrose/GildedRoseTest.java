@@ -1,6 +1,8 @@
 package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -111,6 +113,32 @@ class GildedRoseTest {
         assertThat(item.quality).isEqualTo(quality);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"Conjured Mana Cake", "Conjured bread"})
+    void conjuredItemsDegradeTwiceAsFast(String conjuredItemName){
+        Item item = new Item(conjuredItemName, 10, 11);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+        updateQuality(gildedRose, 4);
+
+        sellInAndQualityShouldBe(item, 6, 3);
+
+        updateQuality(gildedRose, 2);
+        sellInAndQualityShouldBe(item, 4, 0);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"Conjured Mana Cake", "Conjured bread"})
+    void conjuredItemsDegrade4TimesAsFastWhenBeyondSellDate(String conjuredItemName){
+        Item item = new Item(conjuredItemName, 10, 30);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+        int i = 12;
+        updateQuality(gildedRose, i);
+
+        sellInAndQualityShouldBe(item, -2, 2);
+
+        gildedRose.updateQuality();
+        sellInAndQualityShouldBe(item, -3, 0);
+    }
 
     private static void updateQuality(GildedRose gildedRose, int amount) {
         for (int i = 0; i < amount; i++) {

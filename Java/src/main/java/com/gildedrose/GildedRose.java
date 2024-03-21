@@ -30,6 +30,9 @@ class GildedRose {
             if (item.quality > 0) {
                 if (!itemIs(item, "Sulfuras, Hand of Ragnaros")) {
                     decrementItemQuality(item);
+                    if(isConjured(item)){
+                        decrementItemQuality(item);
+                    }
                 }
             }
         } else {
@@ -41,6 +44,10 @@ class GildedRose {
                 }
             }
         }
+    }
+
+    private boolean isConjured(Item item) {
+        return item.name.startsWith("Conjured");
     }
 
     private void applyAging(Item item) {
@@ -57,6 +64,9 @@ class GildedRose {
                 if (item.quality > 0) {
                     if (!itemIs(item, "Sulfuras, Hand of Ragnaros")) {
                         decrementItemQuality(item);
+                        if(isConjured(item)){
+                            decrementItemQuality(item);
+                        }
                     }
                 }
             }
@@ -68,7 +78,9 @@ class GildedRose {
     }
 
     private void decrementItemQuality(Item item) {
-        item.quality = item.quality - 1;
+        if(item.quality > 0){
+            item.quality = item.quality - 1;
+        }
     }
 
     private void setBackStagePassValueTo0(Item item) {

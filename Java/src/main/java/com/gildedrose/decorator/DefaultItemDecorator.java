@@ -1,33 +1,23 @@
-package com.gildedrose;
+package com.gildedrose.decorator;
 
-public class DefaultItemDecorator implements ItemDecorator {
+import com.gildedrose.Item;
+
+class DefaultItemDecorator implements ItemDecorator {
 
     protected DefaultItemDecorator(Item item) {
         this.item = item;
     }
 
     public void ageItem() {
-        applyQualityAdaptations();
+        decrementItemQuality();
         applyAging();
         if (isExpired()) {
-            applyExtraAdaptationsToQualityForExpiredItem();
-        }
-    }
-
-    private void applyQualityAdaptations() {
-        if (item.quality > 0) {
             decrementItemQuality();
         }
     }
 
     private void applyAging() {
         item.sellIn = item.sellIn - 1;
-    }
-
-    private void applyExtraAdaptationsToQualityForExpiredItem() {
-        if (item.quality > 0) {
-            decrementItemQuality();
-        }
     }
 
     private boolean isExpired() {

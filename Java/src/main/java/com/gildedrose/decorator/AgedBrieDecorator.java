@@ -1,6 +1,8 @@
-package com.gildedrose;
+package com.gildedrose.decorator;
 
-public class AgedBrieDecorator implements ItemDecorator {
+import com.gildedrose.Item;
+
+class AgedBrieDecorator implements ItemDecorator {
 
     public static final String AGED_BRIE = "Aged Brie";
     public static final int MAX_QUALITY = 50;
@@ -12,28 +14,15 @@ public class AgedBrieDecorator implements ItemDecorator {
 
     @Override
     public void ageItem() {
-        applyQualityAdaptations();
+        incrementItemQuality();
         applyAging();
         if (isExpired()) {
-            applyExtraAdaptationsToQualityForExpiredItem();
-        }
-    }
-
-    private void applyQualityAdaptations() {
-        if (this.item.quality < MAX_QUALITY) {
             incrementItemQuality();
-
         }
     }
 
     private void applyAging() {
         item.sellIn = item.sellIn - 1;
-    }
-
-    private void applyExtraAdaptationsToQualityForExpiredItem() {
-        if (item.quality < MAX_QUALITY) {
-            incrementItemQuality();
-        }
     }
 
     private boolean isExpired() {
@@ -43,6 +32,8 @@ public class AgedBrieDecorator implements ItemDecorator {
     private final Item item;
 
     private void incrementItemQuality() {
-        item.quality = item.quality + 1;
+        if (item.quality < MAX_QUALITY) {
+            item.quality = item.quality + 1;
+        }
     }
 }

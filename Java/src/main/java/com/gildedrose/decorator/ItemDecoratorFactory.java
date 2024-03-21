@@ -3,6 +3,9 @@ package com.gildedrose.decorator;
 import com.gildedrose.*;
 
 public class ItemDecoratorFactory {
+
+    public static final int DEFAULT_DEGRADATION_MODIFIER = 1;
+
     public static ItemDecorator create(Item item) {
         if (item.name.equals(AgedBrieDecorator.AGED_BRIE)) {
             return new AgedBrieDecorator(item);
@@ -10,10 +13,16 @@ public class ItemDecoratorFactory {
             return new TAFKAL80ETCBackstagePass(item);
         } else if (item.name.equals(SulfurasDecorator.ITEM_NAME)) {
             return new SulfurasDecorator();
-        } else if (item.name.startsWith(ConjuredItemDecorator.ITEM_PREFIX)) {
-            return new DegradingItemDecorator(item, 2);
         } else {
-            return new DegradingItemDecorator(item, 1);
+            int degradationModifier = DEFAULT_DEGRADATION_MODIFIER;
+            if (isConjured(item)) {
+                degradationModifier*=2;
+            }
+            return new DegradingItemDecorator(item, degradationModifier);
         }
+    }
+
+    private static boolean isConjured(Item item) {
+        return item.name.startsWith(ConjuredItemDecorator.ITEM_PREFIX);
     }
 }

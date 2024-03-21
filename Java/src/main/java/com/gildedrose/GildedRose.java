@@ -9,7 +9,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            ItemDecorator itemDecorator = ItemDecorator.createItemWrapper(item);
+            ItemDecorator itemDecorator = ItemDecoratorFactory.create(item);
             itemDecorator.ageItem();
         }
     }

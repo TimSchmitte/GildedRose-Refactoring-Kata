@@ -10,14 +10,8 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            ItemWrapper itemWrapper = new ItemWrapper(item);
-            itemWrapper.applyQualityAdaptations();
-
-            itemWrapper.applyAging();
-
-            if (itemWrapper.isExpired()) {
-                itemWrapper.applyExtraAdaptationsToQualityForExpiredItem();
-            }
+            ItemDecorator itemDecorator = ItemDecorator.createItemWrapper(item);
+            itemDecorator.ageItem();
         }
     }
 

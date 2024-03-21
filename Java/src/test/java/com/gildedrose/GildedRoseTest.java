@@ -81,7 +81,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void bDAWGKeyChainShouldNeverDegradeAndNeverHasToBeSold() {
+    void sulfurasShouldNeverDegradeAndNeverHasToBeSold() {
         Item item = new Item("Sulfuras, Hand of Ragnaros", 1, 80);
         GildedRose gildedRose = new GildedRose(new Item[]{
             item

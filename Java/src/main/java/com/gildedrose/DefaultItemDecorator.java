@@ -18,28 +18,22 @@ public class DefaultItemDecorator implements ItemDecorator {
 
     private void applyQualityAdaptations() {
         if (item.quality > 0) {
-            if (!itemIs("Sulfuras, Hand of Ragnaros")) {
+            decrementItemQuality();
+            if (isConjured()) {
                 decrementItemQuality();
-                if (isConjured()) {
-                    decrementItemQuality();
-                }
             }
         }
     }
 
     private void applyAging() {
-        if (!itemIs( "Sulfuras, Hand of Ragnaros")) {
-            item.sellIn = item.sellIn - 1;
-        }
+        item.sellIn = item.sellIn - 1;
     }
 
     private void applyExtraAdaptationsToQualityForExpiredItem() {
         if (item.quality > 0) {
-            if (!itemIs("Sulfuras, Hand of Ragnaros")) {
+            decrementItemQuality();
+            if (isConjured()) {
                 decrementItemQuality();
-                if (isConjured()) {
-                    decrementItemQuality();
-                }
             }
         }
     }
@@ -49,10 +43,6 @@ public class DefaultItemDecorator implements ItemDecorator {
     }
 
     private final Item item;
-
-    private boolean itemIs(String name) {
-        return item.name.equals(name);
-    }
 
     private void decrementItemQuality() {
         if (item.quality > 0) {

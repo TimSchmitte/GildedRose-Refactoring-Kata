@@ -2,12 +2,16 @@ package com.gildedrose.decorator;
 
 import com.gildedrose.Item;
 
-class DefaultItemDecorator implements ItemDecorator {
+public class DegradingItemDecorator implements ItemDecorator {
+    protected final Item item;
+    private final int degradationModifier;
 
-    protected DefaultItemDecorator(Item item) {
+    public DegradingItemDecorator(Item item, int degradationModifier) {
         this.item = item;
+        this.degradationModifier = degradationModifier;
     }
 
+    @Override
     public void ageItem() {
         decrementItemQuality();
         applyAging();
@@ -24,12 +28,11 @@ class DefaultItemDecorator implements ItemDecorator {
         return this.item.sellIn < 0;
     }
 
-    private final Item item;
-
     public void decrementItemQuality() {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
+        if (item.quality > degradationModifier) {
+            item.quality = item.quality - degradationModifier;
+        }else{
+            item.quality = 0;
         }
     }
-
 }

@@ -11,9 +11,9 @@ public class ItemDecoratorFactory {
         } else if (item.name.equals(SulfurasDecorator.ITEM_NAME)) {
             return new SulfurasDecorator();
         } else if (item.name.startsWith(ConjuredItemDecorator.ITEM_PREFIX)) {
-            return new ConjuredItemDecorator(item);
+            return new DegradingItemDecorator(item, 2);
         } else {
-            return new DefaultItemDecorator(item);
+            return new DegradingItemDecorator(item, 1);
         }
     }
 }
